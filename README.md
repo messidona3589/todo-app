@@ -14,5 +14,7 @@ Optimization :
   4. forceUpdate function
   
   React.memo, useState의 함수형 업데이트 & useReducer 사용, react-virtualized 사용
+  
+redux 사용 - createAction, handleActions, 객체 비구조화 할당 {payload : ~}, produce(immer) 사용, useSelector, useDispatch 사용, 유틸 useActions hook사용
 
 
