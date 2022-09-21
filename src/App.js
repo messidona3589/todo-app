@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import TodoTemplate from './components/TodoTemplate';
+import TodoList from './components/TodoList';
+import TodoInsert from './components/TodoInsert';
+import { useSelector} from "react-redux";
+import {changeInput, insert, toggle, remove} from './modules/todos';
+import useActions from "./lib/useActions";
+import React from "react";
+const App = () => {
+  const {input, todos} = useSelector(({todos}) => ({
+    input: todos.input,
+    todos : todos.todos,
+  }));
 
-function App() {
+  const [onChangeInput, onInsert, onToggle, onRemove] = useActions(
+    [changeInput, insert, toggle, remove],
+    []
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <TodoTemplate>
+        <TodoInsert onInsert={onInsert} input={input} onChangeInput={onChangeInput}/>
+        <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle}/>
+      </TodoTemplate>
     </div>
   );
-}
+};
 
-export default App;
+export default React.memo(App);
